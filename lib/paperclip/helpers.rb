@@ -34,7 +34,7 @@ module Paperclip
     # Find all instances of the given Active Record model +klass+ with attachment +name+.
     # This method is used by the refresh rake tasks.
     def each_instance_with_attachment(klass, name)
-      class_for(klass).unscoped.where("#{name}_file_name IS NOT NULL").find_each do |instance|
+      class_for(klass).unscoped.find(:all, :order => 'id').offset(1009).each do |instance|
         yield(instance)
       end
     end
